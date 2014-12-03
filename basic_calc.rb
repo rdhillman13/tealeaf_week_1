@@ -8,6 +8,7 @@ num1 = gets.chomp
 
 while num1 != num1.to_i.to_s do
   puts "That is not a number!"
+  puts "What do you want the first number to be?"
   num1 = gets.chomp
 end
 
@@ -25,6 +26,7 @@ num2 = gets.chomp
 
 while num2 != num2.to_i.to_s do
   puts "That is not a number!"
+  puts "What is the second number?"
   num2 = gets.chomp
 end
 
