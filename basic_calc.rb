@@ -1,3 +1,5 @@
+#Calculator
+
 def say(m)
 	puts "-- #{m} --"
 end
@@ -39,3 +41,4 @@ elsif operator == '/'
 end
 
 puts "-- Result is #{result} --"
+
