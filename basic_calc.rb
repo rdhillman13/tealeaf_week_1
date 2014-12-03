@@ -1,7 +1,5 @@
-#Calculator
-
 def say(m)
-	puts "-- #{m} --"
+  puts "-- #{m} --"
 end
 
 say "Whats up!? Want to calculate some basic numbers?"
@@ -17,9 +15,9 @@ say "What function would you like to perform? (+, -, *, /)"
 operator = gets.chomp
 
 while operator != "+"; "-"; "*"; "/"
-	puts "Please input a valid operator"
-	puts "What function would you like to perform? (+, -, *, /)"
-	operator = gets.chomp
+  puts "Please input a valid operator"
+  puts "What function would you like to perform? (+, -, *, /)"
+  operator = gets.chomp
 end
 
 say "What is the second number?"
@@ -31,13 +29,13 @@ while num2 != num2.to_i.to_s do
 end
 
 if operator == "+"
-	result = num1.to_i + num2.to_i
+  result = num1.to_i + num2.to_i
 elsif operator == '-'
-	result = num1.to_i - num2.to_i
+  result = num1.to_i - num2.to_i
 elsif operator == '*'
-	result = num1.to_i * num2.to_i
+  result = num1.to_i * num2.to_i
 elsif operator == '/'
-	result = num1.to_i / num2.to_f
+  result = num1.to_i / num2.to_f
 end
 
 puts "-- Result is #{result} --"
