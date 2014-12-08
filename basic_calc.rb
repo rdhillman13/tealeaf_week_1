@@ -1,5 +1,5 @@
 def say(m)
-  puts "-- #{m} --"
+  puts "- #{m} -"
 end
 
 say "Whats up!? Want to calculate some basic numbers?"
@@ -15,7 +15,7 @@ end
 say "What function would you like to perform? (+, -, *, /)"
 operator = gets.chomp
 
-while operator != "+"; "-"; "*"; "/"
+while operator != "+" && operator != "-" && operator != "*" && operator != "/"
   puts "Please input a valid operator"
   puts "What function would you like to perform? (+, -, *, /)"
   operator = gets.chomp
