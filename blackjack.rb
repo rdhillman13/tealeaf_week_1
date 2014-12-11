@@ -57,7 +57,6 @@ end
 
 
 # Program -------------------
-
 system 'clear'
 puts "Welcome to the Jack is Black Casino - let's play some Blackjack!"
 puts "What is your name?"
@@ -66,12 +65,12 @@ player_money = 250
 puts "Welcome #{name}!"
 
 loop do
-# Initialize Deck
-suits = ['♠', '♥', '♦', '♣']
-cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+  # Initialize Deck
+  suits = ['♠', '♥', '♦', '♣']
+  cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
-deck = suits.product(cards)
-deck.shuffle!
+  deck = suits.product(cards)
+  deck.shuffle!
   # Bet
   system 'clear'
   puts "You have \$#{player_money} to play with"
