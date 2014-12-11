@@ -40,7 +40,7 @@ loop do
   elsif (user_choice == 'r' && computer_choice == 's') || (user_choice == 'p' && computer_choice == 'r') || (user_choice == 's' && computer_choice == 'p')
     win(user_choice)
     puts 'you win!'
-  elsif (user_choice == 'r' && computer_choice == 'p') || (user_choice == 'p' && computer_choice == 's') || (user_choice == 's' && computer_choice == 'r')
+  else
     loss(user_choice)
     puts 'you lose!'
   end
