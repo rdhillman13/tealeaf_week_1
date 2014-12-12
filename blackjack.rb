@@ -1,43 +1,8 @@
-require 'pry'
-
-# Blackjack
-
-# Welcome and ask name
-# Deal cards
-
-# calculate/print player total
-
-# loop while  
-	# player hits
-	# calculate total
-# elsif
-	# player busts
-	# player loses
-# else 
-	# player stays
-
-# flip down card
-# calculate/print dealer total
-
-# loop while 
-	# dealer hits
-	# calculate total
-# elsif
-	# dealer busts
-	# dealer loses
-# else 
-	# dealer stays (dealer has to stay at 17 and has to hit if lower than 17)
-
-# announce winner
-# play another hand?
-
-# ---------------------------
-
 def calculate_total(cards) 
-  arr = cards.map{|e| e[1] }
+  array = cards.map{|e| e[1] }
 
   total = 0
-  arr.each do |value|
+  array.each do |value|
     if value == "A"
       total += 11
     elsif value.to_i == 0 # J, Q, K
@@ -48,15 +13,13 @@ def calculate_total(cards)
   end
 
   #correct for Aces if '11' bust
-  arr.select{|e| e == "A"}.count.times do
+  array.select{|e| e == "A"}.count.times do
     total -= 10 if total > 21
   end
 
   total
 end
 
-
-# Program -------------------
 system 'clear'
 puts "Welcome to the Jack is Black Casino - let's play some Blackjack!"
 puts "What is your name?"
@@ -97,27 +60,27 @@ loop do
   puts "Ok #{name}, #{bet} it is! Let's deal!"
 
   # Deal cards
-  playercards = []
-  dealercards = []
+  player_cards = []
+  dealer_cards = []
 
-  playercards << deck.pop
-  dealercards << deck.pop
-  playercards << deck.pop
-  dealercards << deck.pop
+  player_cards << deck.pop
+  dealer_cards << deck.pop
+  player_cards << deck.pop
+  dealer_cards << deck.pop
 
-  dealertotal = calculate_total(dealercards)
-  playertotal = calculate_total(playercards)
+  dealer_total = calculate_total(dealer_cards)
+  player_total = calculate_total(player_cards)
 
   sleep 1.5
 
-  puts "dealer is showing #{dealercards[1]}"
+  puts "dealer is showing #{dealer_cards[1]}"
   puts " "
-  puts "#{name} has #{playercards} -- with a value of #{playertotal} "
+  puts "#{name} has #{player_cards} -- with a value of #{player_total} "
 
   sleep 1.5
 
   # If player has BJ and dealer doesn't
-  if (playertotal == 21) && (dealertotal <= 20)
+  if (player_total == 21) && (dealer_total <= 20)
     player_money = player_money + (bet * 1.5)
     system 'clear'
     puts "BLACKJACK!! You win 1.5X your bet! You now have \$#{player_money}!!"
@@ -128,7 +91,7 @@ loop do
   end
 
   # If both have BJ
-  if (playertotal == 21) && (dealertotal == 21)
+  if (player_total == 21) && (dealer_total == 21)
     system 'clear'
     puts "You both got blackjacks.. so its a PUSH! You still have \$#{player_money}!!"
     puts "Do you want to play another hand (Y or N)?"
@@ -138,7 +101,7 @@ loop do
   end 
 
   #If dealer has BJ and player doesn't
-  if (dealertotal == 21) && (playertotal <= 20)
+  if (dealer_total == 21) && (player_total <= 20)
     puts " "
     puts "Checking for blackjack...."
     sleep 1.0
@@ -152,7 +115,7 @@ loop do
   end
 
   # Player Hand
-  while playertotal < 21
+  while player_total < 21
   	puts 'Type 1 to HIT'
   	puts 'Type 2 to STAND'
     puts "---------------"
@@ -168,67 +131,67 @@ loop do
     
     if player_choice == '1'
       system 'clear'
-  		playercards << deck.pop
-  		playertotal = calculate_total(playercards)
-      puts "dealer is showing #{dealercards[1]}"
+  		player_cards << deck.pop
+  		player_total = calculate_total(player_cards)
+      puts "dealer is showing #{dealer_cards[1]}"
       puts " "
-  		puts "#{name} now has #{playercards} -- with a value of #{playertotal}"
+  		puts "#{name} now has #{player_cards} -- with a value of #{player_total}"
   	elsif player_choice == '2'
-  		puts "#{name} has chosen to stand with a value of #{playertotal}"
+  		puts "#{name} has chosen to stand with a value of #{player_total}"
   	  break
   	end
   end
 
-  if	playertotal >= 22
-      player_money = (player_money - bet)
-      sleep 1.0 
-      system 'clear'
-  		puts "#{name} BUSTED!! You lose \$#{bet}! You now have \$#{player_money} to play with."
-      puts "Do you want to play another hand (Y or N)?"
-      player_bust = gets.chomp.downcase
-      break if player_bust != 'y'
-      redo if player_bust == 'y' 
+  if	player_total >= 22
+    player_money = (player_money - bet)
+    sleep 1.0 
+    system 'clear'
+		puts "#{name} BUSTED!! You lose \$#{bet}! You now have \$#{player_money} to play with."
+    puts "Do you want to play another hand (Y or N)?"
+    player_bust = gets.chomp.downcase
+    break if player_bust != 'y'
+    redo if player_bust == 'y' 
   end
 
   # Dealer Hand
   sleep 1.0
   puts " "
-  puts "Dealer flipped a #{dealercards[0]} -- She has a value of #{dealertotal}"
+  puts "Dealer flipped a #{dealer_cards[0]} -- She has a value of #{dealer_total}"
   sleep 1.0
   puts " "
 
-  while dealertotal < 17
-    dealercards << deck.pop
-  	dealertotal = calculate_total(dealercards)
-  	puts "Dealer now has #{dealercards} -- with a total of #{dealertotal}"
+  while dealer_total < 17
+    dealer_cards << deck.pop
+  	dealer_total = calculate_total(dealer_cards)
+  	puts "Dealer now has #{dealer_cards} -- with a total of #{dealer_total}"
     sleep 1.0
   end
 
-  if dealertotal >= 22
-      player_money = (player_money + bet)
-      sleep 1.0
-      system 'clear'
-      puts "Dealer BUSTED!! #{name} WINS!!"
-      puts "#{name}, you now have \$#{player_money} to play with!"
-      puts "Do you want to play another hand (Y or N)?"
-      dealer_b = gets.chomp.downcase
-      break if dealer_b != 'y'
-      redo if dealer_b == 'y'
+  if dealer_total >= 22
+    player_money = (player_money + bet)
+    sleep 1.0
+    system 'clear'
+    puts "Dealer BUSTED!! #{name} WINS!!"
+    puts "#{name}, you now have \$#{player_money} to play with!"
+    puts "Do you want to play another hand (Y or N)?"
+    dealer_b = gets.chomp.downcase
+    break if dealer_b != 'y'
+    redo if dealer_b == 'y'
   end 
 
   sleep 1.5
   system 'clear'
 
   # Declaring Winner or Loser
-  if (playertotal > dealertotal) && (playertotal <= 21) || (dealertotal > 21)
-    puts "CONGRATS #{name}! Your #{playertotal} beats her #{dealertotal}.. YOU WIN!!"
+  if (player_total > dealer_total) && (player_total <= 21) || (dealer_total > 21)
+    puts "CONGRATS #{name}! Your #{player_total} beats her #{dealer_total}.. YOU WIN!!"
     player_money = (bet) + player_money
     puts "You won \$#{bet}! You now have \$#{player_money} to play with!" 
-  elsif (dealertotal > playertotal) && (dealertotal <= 21) || (playertotal > 21)
-    puts "SORRY #{name}, but her #{dealertotal} beats your #{playertotal}.. YOU LOSE!"
+  elsif (dealer_total > player_total) && (dealer_total <= 21) || (player_total > 21)
+    puts "SORRY #{name}, but her #{dealer_total} beats your #{player_total}.. YOU LOSE!"
     player_money = (player_money - bet) 
     puts "You lost \$#{bet}! You have \$#{player_money} left."
-  elsif (playertotal == dealertotal) && (dealertotal <= 21) && (playertotal <= 21)
+  elsif (player_total == dealer_total) && (dealer_total <= 21) && (player_total <= 21)
   	puts "it's a PUSH!"
     puts "You have \$#{player_money} left to play with!"
   else
